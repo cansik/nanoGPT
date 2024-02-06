@@ -9,3 +9,5 @@ __pycache__/
 *.pyc
 input.txt
 _chat.txt
+data/custom/mundart.txt
+data/custom/mundart
