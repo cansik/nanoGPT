@@ -6,11 +6,11 @@ import numpy as np
 import tiktoken
 
 parser = argparse.ArgumentParser()
-parser.add_argument("input_file", type=str, help="Input file to process (line by line)")
+parser.add_argument("input_file", type=str, help="Input file (without .txt) to process (line by line)")
 args = parser.parse_args()
 
 # download the tiny shakespeare dataset
-input_file_path = Path(os.path.join(os.path.dirname(__file__), args.input_file))
+input_file_path = Path(os.path.join(os.path.dirname(__file__), f"{args.input_file}.txt"))
 if not os.path.exists(input_file_path):
     print(f"Could not find file at path {input_file_path.absolute()}")
     exit(1)
