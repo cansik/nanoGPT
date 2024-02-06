@@ -45,6 +45,7 @@ if not mundart_path.exists():
     download_and_unzip(url, zip_path, extract_to)
 
 contents = []
+print("processing xml files...")
 for xml_file in mundart_path.rglob("*.xml"):
     tree = ET.parse(xml_file)
     s_elements = tree.findall(".//{http://www.tei-c.org/ns/1.0}s")
