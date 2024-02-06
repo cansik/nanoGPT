@@ -5,6 +5,8 @@ import zipfile
 import os
 import xml.etree.ElementTree as ET
 
+from tqdm import tqdm
+
 # The URL of the zip file
 url = "https://idiotikon.ch/Texte/chmk/XML-CHMK_v2.0_free_subcorpus.zip"
 
@@ -45,8 +47,8 @@ if not mundart_path.exists():
     download_and_unzip(url, zip_path, extract_to)
 
 contents = []
-print("processing xml files...")
-for xml_file in mundart_path.rglob("*.xml"):
+files = list(mundart_path.rglob("*.xml"))
+for xml_file in tqdm(files, total=len(files), desc="processing xml files"):
     tree = ET.parse(xml_file)
     s_elements = tree.findall(".//{http://www.tei-c.org/ns/1.0}s")
 
@@ -60,5 +62,5 @@ for xml_file in mundart_path.rglob("*.xml"):
     contents.append(text)
 
 context_text = "\n\n".join(contents)
-Path("mundart.txt").write_text(context_text, encoding="utf-8")
+Path(os.path.dirname(__file__), "mundart.txt").write_text(context_text, encoding="utf-8")
 print("done")
